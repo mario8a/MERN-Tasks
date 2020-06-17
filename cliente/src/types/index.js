@@ -1,4 +1,5 @@
 //Se describen las acciones de lo que va pasando en la aplicacion
 /**Ej: EL login de usuario si fue correcto o incorrecto */
 
-export const FORMULARIO_PROYECTO = 'PROYECTO_PROYECTO';
+export const FORMULARIO_PROYECTO = 'FORMULARIO_PROYECTO';
+export const OBTENER_PROYECTOS = 'OBTENER_PROYECTOS';
