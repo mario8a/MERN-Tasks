@@ -1,8 +1,13 @@
 import React, { useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
+import { 
+    FORMULARIO_PROYECTO, 
+    OBTENER_PROYECTOS, 
+    AGREGAR_PROYECTO 
+} from '../../types';
 
 
 
@@ -18,7 +23,7 @@ const ProyectoState = props => {
 
     //Este state cuando pase a true se mostrara el form para agregar un proyecto nuevo
     const initialState = {
-         proyectos: [],
+        proyectos: [],
         formulario: false
     }
 
@@ -41,6 +46,17 @@ const ProyectoState = props => {
         })
     }
 
+    //Agregar nuevo proyecto
+    const agregarProyecto = proyecto => {
+        proyecto.id = uuidv4()
+
+        //instertar el proyecto en el state
+        dispatch({
+            type: AGREGAR_PROYECTO,
+            payload: proyecto
+        })
+    }
+
     //Provider desde aqui nacen los datos
     /**props.children- los diferentes hijos de este provider se pasen los datos en todos los
      * componentes
@@ -56,7 +72,8 @@ const ProyectoState = props => {
                 proyectos: state.proyectos,
                 formulario: state.formulario,
                 mostrarFormulario,
-                obtenerProyectos
+                obtenerProyectos,
+                agregarProyecto
             }}
         >
             {props.children}
