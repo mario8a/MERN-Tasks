@@ -6,7 +6,8 @@ import proyectoReducer from './proyectoReducer';
 import { 
     FORMULARIO_PROYECTO, 
     OBTENER_PROYECTOS, 
-    AGREGAR_PROYECTO 
+    AGREGAR_PROYECTO,
+    VALIDAR_FORMULARIO
 } from '../../types';
 
 
@@ -24,7 +25,8 @@ const ProyectoState = props => {
     //Este state cuando pase a true se mostrara el form para agregar un proyecto nuevo
     const initialState = {
         proyectos: [],
-        formulario: false
+        formulario: false,
+        errorformulario: false
     }
 
     //Dispatch para crear las acciones
@@ -57,6 +59,13 @@ const ProyectoState = props => {
         })
     }
 
+    //validar formulario por errores
+    const mostrarError = () => {
+        dispatch({
+            type: VALIDAR_FORMULARIO
+        })
+    }
+
     //Provider desde aqui nacen los datos
     /**props.children- los diferentes hijos de este provider se pasen los datos en todos los
      * componentes
@@ -71,9 +80,11 @@ const ProyectoState = props => {
             value={{
                 proyectos: state.proyectos,
                 formulario: state.formulario,
+                errorformulario: state.errorformulario,
                 mostrarFormulario,
                 obtenerProyectos,
-                agregarProyecto
+                agregarProyecto,
+                mostrarError
             }}
         >
             {props.children}
