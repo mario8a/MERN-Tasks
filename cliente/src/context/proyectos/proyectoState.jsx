@@ -7,7 +7,9 @@ import {
     FORMULARIO_PROYECTO, 
     OBTENER_PROYECTOS, 
     AGREGAR_PROYECTO,
-    VALIDAR_FORMULARIO
+    VALIDAR_FORMULARIO,
+    PROYECTO_ACTUAL,
+    ELIMINAR_PROYECTO
 } from '../../types';
 
 
@@ -23,10 +25,12 @@ const ProyectoState = props => {
     ]
 
     //Este state cuando pase a true se mostrara el form para agregar un proyecto nuevo
+    // proyecto -> sera el que este seleccionado, al pricipio inicia como null o que no abra ninguno seleccionado
     const initialState = {
         proyectos: [],
         formulario: false,
-        errorformulario: false
+        errorformulario: false,
+        proyecto: null
     }
 
     //Dispatch para crear las acciones
@@ -66,6 +70,22 @@ const ProyectoState = props => {
         })
     }
 
+    //obtener proyecto actual al seleccionado dandole un click
+    const proyectoActual = proyectoId => {
+        dispatch({
+            type: PROYECTO_ACTUAL,
+            payload: proyectoId
+        })
+    }
+
+    //Elimina un proyecto
+    const eliminaProyecto = proyectoId => {
+        dispatch({
+            type: ELIMINAR_PROYECTO,
+            payload: proyectoId
+        })
+    }
+
     //Provider desde aqui nacen los datos
     /**props.children- los diferentes hijos de este provider se pasen los datos en todos los
      * componentes
@@ -81,10 +101,13 @@ const ProyectoState = props => {
                 proyectos: state.proyectos,
                 formulario: state.formulario,
                 errorformulario: state.errorformulario,
+                proyecto: state.proyecto,
                 mostrarFormulario,
                 obtenerProyectos,
                 agregarProyecto,
-                mostrarError
+                mostrarError,
+                proyectoActual,
+                eliminaProyecto
             }}
         >
             {props.children}

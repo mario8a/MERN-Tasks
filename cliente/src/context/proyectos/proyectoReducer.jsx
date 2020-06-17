@@ -2,7 +2,9 @@ import {
     FORMULARIO_PROYECTO, 
     OBTENER_PROYECTOS, 
     AGREGAR_PROYECTO,
-    VALIDAR_FORMULARIO
+    VALIDAR_FORMULARIO,
+    PROYECTO_ACTUAL,
+    ELIMINAR_PROYECTO
 } from '../../types';
 
 export default (state, action) => {
@@ -30,6 +32,21 @@ export default (state, action) => {
             return {
                 ...state,
                 errorformulario: true
+            }
+        case PROYECTO_ACTUAL:
+            return{
+                ...state,
+                /**Compara el id con el que estoy seleccionando, por ejemplo primero crea el 
+                 * arreglo de los id del 1 al 5 y si selecciono el 2, este lo va reccorrer hasta
+                 * hacer ese math con el id 2
+                 */
+                proyecto: state.proyectos.filter(proyecto => proyecto.id === action.payload)
+            }
+        case ELIMINAR_PROYECTO :
+            return {
+                ...state,
+                proyectos: state.proyectos.filter(proyecto => proyecto.id !== action.payload),
+                proyecto: null
             }
 
         default:

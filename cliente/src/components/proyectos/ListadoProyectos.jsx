@@ -14,7 +14,7 @@ const ListadoProyectos = () => {
     }, [])
 
     //si no hay proyectos no mestres pus n ada
-    if(proyectos.length === null) return null;
+    if(proyectos.length === 0) return <p>No hay proyectos, comienza creando uno</p> ;
 
 
     return ( 

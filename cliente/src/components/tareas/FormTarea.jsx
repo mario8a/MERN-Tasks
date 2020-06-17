@@ -1,7 +1,20 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const FormTarea = () => {
+
+    //Extraer si un proyecto esta activo
+    const proyectosContext = useContext(proyectoContext);
+    const {proyecto} = proyectosContext;
+
+    //si no hay proyecto seleccionado
+    if(!proyecto) return null;
+
+    /**Debido a que proyecto es un arreglo se debe acceder segun su pocicion, es
+     * por esa razon que se aplica array destructuring 
+     */
+    const [proyectoActual] = proyecto;
+
     return ( 
         <div className="formulario">
             <form action="">
