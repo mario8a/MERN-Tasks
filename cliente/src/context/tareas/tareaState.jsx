@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
-import { TAREAS_PROYECTO, AGREGAR_TAREA } from '../../types/index';
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA } from '../../types/index';
 
 const TareaState = props => {
     const initialState = {
@@ -20,7 +20,8 @@ const TareaState = props => {
             {nombre: 'Elegir Colores', estado: false, proyectoId: 4},
             {nombre: 'Elegir plataformas de pago', estado: true, proyectoId: 3},
         ],
-        tareasproyecto: null
+        tareasproyecto: null,
+        errortarea: false
     }
 
     //Crear el dispatch y el state
@@ -44,13 +45,22 @@ const TareaState = props => {
         })
     }
 
+    //Validar y muestra el error en caso de ser necesario
+    const validarTarea = () => {
+        dispatch({
+            type: VALIDAR_TAREA
+        })
+    }
+
     return (
         <TareaContext.Provider
             value={{
                 tareas: state.tareas,
                 tareasproyecto: state.tareasproyecto,
+                errortarea: state.errortarea,
                 obtenerTareas,
-                agregarTarea
+                agregarTarea,
+                validarTarea
             }}
         >
             {props.children}
