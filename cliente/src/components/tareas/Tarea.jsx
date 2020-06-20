@@ -9,7 +9,7 @@ const Tarea = ({tarea}) => {
      const {proyecto} = proyectosContext;
 
     const tareasContext = useContext(tareaContext);
-    const {eliminarTarea, obtenerTareas} = tareasContext;
+    const {eliminarTarea, obtenerTareas, cambiarEstadotarea, guardarTareaActual} = tareasContext;
 
     //Extraer proyecto con distroturing
     const [proyectoActual] = proyecto;
@@ -18,6 +18,22 @@ const Tarea = ({tarea}) => {
     const tareaEliminar = id => {
         eliminarTarea(id);
         obtenerTareas(proyectoActual.id)
+    }
+
+    //Funcion que modifica el estado de las tareas
+    const cambiarEstado = tarea => {
+        if(tarea.estado) {
+            tarea.estado = false;
+        } else {
+            tarea.estado = true;
+        }
+
+        cambiarEstadotarea(tarea);
+    }
+
+    // Agrega una tarea actual cuando el usuario desea editarla
+    const selecionarTarea = tarea => {
+        guardarTareaActual(tarea)
     }
 
     return (
@@ -29,17 +45,29 @@ const Tarea = ({tarea}) => {
                 ?
 
                     (
-                        <button type="button" className="completo">Completo</button>
+                        <button 
+                            type="button" 
+                            className="completo"
+                            onClick={() => cambiarEstado(tarea)}
+                        >Completo</button>
                     )
                 :
                     (
-                        <button type="button" className="incompleto">Incompleto</button>
+                        <button 
+                            type="button" 
+                            className="incompleto"
+                            onClick={() => cambiarEstado(tarea)}
+                        >Incompleto</button>
                     )
                 }
             </div>
 
             <div className="acciones">
-                <button type="button" className="btn btn-primario">
+                <button 
+                    type="button" 
+                    className="btn btn-primario"
+                    onClick={() => selecionarTarea(tarea)}
+                >
                     Editar
                 </button>
                 <button 
