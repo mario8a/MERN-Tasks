@@ -7,13 +7,15 @@ import Proyectos from './components/proyectos/Proyectos';
 import ProyectoState from './context/proyectos/proyectoState';
 import TareaState from './context/tareas/tareaState';
 import AlertaState from './context/alertas/alertaState';
-
+import AuthState from './context/autenticacion/authState'
 
 function App() {
+  
   return (
     <ProyectoState>
       <TareaState>
         <AlertaState>
+        <AuthState>
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
@@ -21,6 +23,7 @@ function App() {
               <Route exact path="/proyectos" component={Proyectos} />
             </Switch>
           </Router>
+          </AuthState>
         </AlertaState>
       </TareaState>
     </ProyectoState>
